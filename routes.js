@@ -54,4 +54,15 @@ router.put("/api/todo", async (request, response) => {
     }
 });
 
+// Route pour supprimer une tâche
+router.delete("/api/todo/:id", async (request, response) => {
+    try {
+        const id = parseInt(request.params.id);
+        await prisma.todo.delete({ where: { id } });
+        return response.status(200).json({ message: "Tâche supprimée avec succès" });
+    } catch (error) {
+        return response.status(400).json({ error: error.message });
+    }
+});
+
 export default router;
