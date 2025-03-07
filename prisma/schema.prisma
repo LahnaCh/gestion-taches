@@ -11,19 +11,17 @@ model User {
   id    Int    @id @default(autoincrement())
   name  String
   email String @unique
-  tasks Todo[]
 }
 
 model Todo {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
-  description String
+  description String?
   priority    String
-  deadline    BigInt  // Timestamp en millisecondes
-  status      String
-  author      String  
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  deadline    Int      // Timestamp en millisecondes
+  status      String?
+  author      String?
+  userId      Int?
+  createdAt   DateTime @default(now())  // Utilisation du type DateTime pour le timestamp
+  updatedAt   DateTime @updatedAt      // Mise à jour automatique de la date
 }
